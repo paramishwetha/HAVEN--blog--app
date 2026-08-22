@@ -10,8 +10,8 @@ $post_id = intval($_GET['id'] ?? 0);
 $user_id = $_SESSION['user_id'];
 $error = '';
 
-// Authorization Check: Ensure post exists and belongs to current user
-$stmt = $conn->prepare("SELECT * FROM blogPost WHERE id = ? AND user_id = ?");
+// Authorization Check: Query base table 'blogpost' directly
+$stmt = $conn->prepare("SELECT * FROM blogpost WHERE id = ? AND user_id = ?");
 $stmt->bind_param("ii", $post_id, $user_id);
 $stmt->execute();
 $post = $stmt->get_result()->fetch_assoc();
@@ -26,7 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $content = trim($_POST['content'] ?? '');
 
     if (!empty($title) && !empty($content)) {
-        $update_stmt = $conn->prepare("UPDATE blogPost SET title = ?, content = ?, updated_at = NOW() WHERE id = ? AND user_id = ?");
+        // Target base table 'blogpost' directly to allow updates
+        $update_stmt = $conn->prepare("UPDATE blogpost SET title = ?, content = ?, updated_at = NOW() WHERE id = ? AND user_id = ?");
         $update_stmt->bind_param("ssii", $title, $content, $post_id, $user_id);
         if ($update_stmt->execute()) {
             header("Location: single_post.php?id=" . $post_id);
