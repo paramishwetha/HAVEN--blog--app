@@ -1,5 +1,5 @@
 <?php
-// Automatically uses cloud environment variables when live, or falls back to XAMPP defaults
+
 $host   = getenv('DB_HOST')     ?: "localhost";
 $user   = getenv('DB_USER')     ?: "root";
 $pass   = getenv('DB_PASSWORD') ?: "";
