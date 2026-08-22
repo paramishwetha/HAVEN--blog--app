@@ -16,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = $_SESSION['user_id'];
 
     if (!empty($title) && !empty($content)) {
+        //$stmt = $conn->prepare("INSERT INTO blogpost (user_id, title, content, category) VALUES (?, ?, ?, ?)");
         $stmt = $conn->prepare("INSERT INTO blogpost (user_id, title, content, category) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("isss", $user_id, $title, $content, $category);
         if ($stmt->execute()) {

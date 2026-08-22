@@ -4,12 +4,14 @@ require_once 'db.php';
 $category = $_GET['category'] ?? '';
 
 if (!empty($category)) {
-    $stmt = $conn->prepare("SELECT blogPost.*, user.username FROM blogPost JOIN user ON blogPost.user_id = user.id WHERE blogPost.category = ? ORDER BY blogPost.created_at DESC");
+    // Target base table 'blogpost' directly
+    $stmt = $conn->prepare("SELECT blogpost.*, user.username FROM blogpost JOIN user ON blogpost.user_id = user.id WHERE blogpost.category = ? ORDER BY blogpost.created_at DESC");
     $stmt->bind_param("s", $category);
     $stmt->execute();
     $result = $stmt->get_result();
 } else {
-    $query = "SELECT blogPost.*, user.username FROM blogPost JOIN user ON blogPost.user_id = user.id ORDER BY blogPost.created_at DESC";
+    // Target base table 'blogpost' directly
+    $query = "SELECT blogpost.*, user.username FROM blogpost JOIN user ON blogpost.user_id = user.id ORDER BY blogpost.created_at DESC";
     $result = $conn->query($query);
 }
 ?>

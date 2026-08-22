@@ -3,8 +3,8 @@ require_once 'db.php';
 
 $post_id = intval($_GET['id'] ?? 0);
 
-// Fetch post details with author username
-$stmt = $conn->prepare("SELECT blogPost.*, user.username FROM blogPost JOIN user ON blogPost.user_id = user.id WHERE blogPost.id = ?");
+// Fetch post details with author username directly from the base table 'blogpost'
+$stmt = $conn->prepare("SELECT blogpost.*, user.username FROM blogpost JOIN user ON blogpost.user_id = user.id WHERE blogpost.id = ?");
 $stmt->bind_param("i", $post_id);
 $stmt->execute();
 $post = $stmt->get_result()->fetch_assoc();
