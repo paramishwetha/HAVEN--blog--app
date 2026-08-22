@@ -4,4 +4,9 @@ providers = ["php"]
 NIXPACKS_PHP_VERSION = "8.2"
 
 [phases.setup]
-nixPkgs = ["php82", "php82Extensions.mysqli", "php82Extensions.pdo_mysql"]
+nixPkgs = [
+  "php82", 
+  "php82Extensions.mysqli", 
+  "php82Extensions.pdo_mysql", 
+  "php82Packages.composer"
+]
