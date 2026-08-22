@@ -2,6 +2,12 @@
 require_once 'db.php';
 
 // Target base table 'blogpost' directly
+//$query = "SELECT blogpost.*, user.username FROM blogpost 
+         // JOIN user ON blogpost.user_id = user.id 
+          //ORDER BY blogpost.created_at DESC LIMIT 4";   
+//$result = $conn->query($query);
+
+
 $query = "SELECT blogpost.*, user.username FROM blogpost 
           JOIN user ON blogpost.user_id = user.id 
           ORDER BY blogpost.created_at DESC LIMIT 4";   
